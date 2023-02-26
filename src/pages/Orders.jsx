@@ -1,9 +1,22 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
-import { GridComponent, ColumnsDirective, ColumnDirective, Resize, Sort, ContextMenu, Filter, Page, ExcelExport, PdfExport, Edit, Inject } from '@syncfusion/ej2-react-grids';
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+import {
+  GridComponent,
+  ColumnsDirective,
+  ColumnDirective,
+  Resize,
+  Sort,
+  ContextMenu,
+  Filter,
+  Page,
+  ExcelExport,
+  PdfExport,
+  Edit,
+  Inject,
+} from "@syncfusion/ej2-react-grids";
 
-import { ordersData, contextMenuItems, ordersGrid } from '../data/dummy';
-import { Header } from '../components';
+import { ordersData, contextMenuItems, ordersGrid } from "../data/dummy";
+import { Header } from "../components";
 
 const Orders = () => {
   const [artifact, setArtifact] = useState(null);
@@ -11,8 +24,11 @@ const Orders = () => {
   useEffect(() => {
     const getArtifact = async () => {
       try {
-        const response = await axios.get('https://archaeologs-barc6.ondigitalocean.app/api/artifacts');
+        const response = await axios.get(
+          "https://archaeologs-barc6.ondigitalocean.app/api/artifacts"
+        );
         setArtifact(response.data.data);
+        //console.log(response.data);
       } catch (error) {
         console.error(error);
       }
@@ -42,7 +58,18 @@ const Orders = () => {
               <ColumnDirective key={index} {...item} />
             ))}
           </ColumnsDirective>
-          <Inject services={[Resize, Sort, ContextMenu, Filter, Page, ExcelExport, Edit, PdfExport]} />
+          <Inject
+            services={[
+              Resize,
+              Sort,
+              ContextMenu,
+              Filter,
+              Page,
+              ExcelExport,
+              Edit,
+              PdfExport,
+            ]}
+          />
         </GridComponent>
       )}
     </div>
@@ -50,7 +77,6 @@ const Orders = () => {
 };
 
 export default Orders;
-
 
 // import React, { useState, useEffect } from 'react';
 // import axios from 'axios';
@@ -72,7 +98,6 @@ export default Orders;
 //       });
 //   }, []);
 
-  
 //   const editing = { allowDeleting: true, allowEditing: true };
 //   return (
 //     <div className="m-2 md:m-10 mt-24 p-2 md:p-10 bg-white rounded-3xl">
