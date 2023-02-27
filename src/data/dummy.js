@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { AiOutlineCalendar, AiOutlineShoppingCart, AiOutlineAreaChart, AiOutlineBarChart, AiOutlineStock } from 'react-icons/ai';
 import { FiShoppingBag, FiEdit, FiPieChart, FiBarChart, FiCreditCard, FiStar, FiShoppingCart } from 'react-icons/fi';
 import { BsKanban, BsBarChart, BsBoxSeam, BsCurrencyDollar, BsShield, BsChatLeft } from 'react-icons/bs';
@@ -76,19 +76,39 @@ export const kanbanGrid = [
 ];
 const gridEmployeeProfile = (props) => (
   <div className="flex items-center gap-2">
-    <img
-      className="rounded-full w-10 h-10"
-      src={props.EmployeeImage}
-      alt="employee"
-    />
-    <p>{props.Name}</p>
+     {props.photos.length > 0 && (<img
+      className="rounded-xl h-20 md:ml-3"
+      src={props.photos[0].url}
+      alt="order-item"
+    />)}
+    {props.photos.length == 0 && (<img
+      className="rounded-xl h-20 md:ml-3"
+      src="https://th-thumbnailer.cdn-si-edu.com/jkcUzZuQ3yV-CpRBroK4oc-92xE=/1000x750/filters:no_upscale()/https://tf-cmsv2-smithsonianmag-media.s3.amazonaws.com/filer/fd/9f/fd9f697c-0ce0-4eb6-8d45-0e896dc1efcc/2020_may8_recoveredobjects2.jpeg"
+      alt="order-item"
+    />)}
   </div>
 );
+const DetailsTemplate = (props) => {
+  const [showFullDetails, setShowFullDetails] = useState(false);
 
+  const toggleFullDetails = () => {
+    setShowFullDetails(!showFullDetails);
+  };
+
+  return (
+    <div>
+      {showFullDetails ? props.fullDetail : props.fullDetail.substring(0, 37) + '...'}
+      <br />
+      <a href="#" onClick={toggleFullDetails}>
+        {showFullDetails ? 'Show Less' : 'Show More'}
+      </a>
+    </div>
+  );
+};
 const gridEmployeeCountry = (props) => (
   <div className="flex items-center justify-center gap-2">
     <GrLocation />
-    <span>{props.Country}</span>
+    <span>{props.location}</span>
   </div>
 );
 export const EditorData = () => (
@@ -466,7 +486,7 @@ export const customersGrid = [
 
 export const employeesGrid = [
   {
-    headerText: 'Employee',
+    headerText: 'Image',
     width: '150',
     template: gridEmployeeProfile,
     textAlign: 'Center'
@@ -478,35 +498,35 @@ export const employeesGrid = [
     textAlign: 'Center',
   },
   {
-    field: 'Title',
-    headerText: 'Designation',
+    field: 'name',
+    headerText: 'Name',
     width: '170',
     textAlign: 'Center',
   },
   {
-    headerText: 'Country',
-    width: '120',
-    textAlign: 'Center',
+    headerText: 'Location',
+    width: '300',
+    textAlign: 'left',
     template: gridEmployeeCountry
   },
 
   {
-    field: 'HireDate',
-    headerText: 'Hire Date',
+    field: 'artifact_date',
+    headerText: 'Date',
     width: '135',
     format: 'yMd',
     textAlign: 'Center'
   },
 
   {
-    field: 'ReportsTo',
-    headerText: 'Reports To',
+    headerText: 'Details',
     width: '120',
-    textAlign: 'Center'
+    textAlign: 'Center',
+    template: (props) => <DetailsTemplate fullDetail={props.detail} />,
   },
   {
-    field: 'EmployeeID',
-    headerText: 'Employee ID',
+    field: 'id',
+    headerText: 'ID',
     width: '125',
     textAlign: 'Center'
   },
@@ -531,7 +551,7 @@ export const links = [
         icon: <AiOutlineShoppingCart />,
       },
       {
-        name: 'employees',
+        name: 'Artifact details',
         icon: <IoMdContacts />,
       },
       {

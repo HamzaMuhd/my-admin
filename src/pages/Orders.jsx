@@ -8,6 +8,7 @@ import {
   Sort,
   ContextMenu,
   Filter,
+  Search,
   Page,
   ExcelExport,
   PdfExport,
@@ -20,6 +21,7 @@ import { Header } from "../components";
 
 const Orders = () => {
   const [artifact, setArtifact] = useState(null);
+  const toolbarOptions = ['Search'];
 
   useEffect(() => {
     const getArtifact = async () => {
@@ -28,7 +30,6 @@ const Orders = () => {
           "https://archaeologs-barc6.ondigitalocean.app/api/artifacts"
         );
         setArtifact(response.data.data);
-        //console.log(response.data);
       } catch (error) {
         console.error(error);
       }
@@ -36,8 +37,34 @@ const Orders = () => {
 
     getArtifact();
   }, []);
+  const editing = {
+    allowAdding: true,
+    allowEditing: true,
+    allowDeleting: true,
+    mode: "Batch",
+    allowEditOnDblClick: true
+  };
 
-  const editing = { allowDeleting: true, allowEditing: true };
+  const handleActionComplete = async (args) => {
+    if (args.requestType === "save") {
+      try {
+        await axios.patch(
+          `https://archaeologs-barc6.ondigitalocean.app/api/artifacts/${args.data[0].id}`,
+          args.data[0]
+        );
+      } catch (error) {
+        console.error(error);
+      }
+    } else if (args.requestType === "delete") {
+      try {
+        await axios.delete(
+          `https://archaeologs-barc6.ondigitalocean.app/api/artifacts/${args.data[0].id}`
+        );
+      } catch (error) {
+        console.error(error);
+      }
+    }
+  };
 
   return (
     <div className="m-2 md:m-10 mt-24 p-2 md:p-10 bg-white rounded-3xl">
@@ -52,6 +79,8 @@ const Orders = () => {
           allowPdfExport
           contextMenuItems={contextMenuItems}
           editSettings={editing}
+          actionComplete={handleActionComplete}
+          toolbar={toolbarOptions}
         >
           <ColumnsDirective>
             {ordersGrid.map((item, index) => (
@@ -68,15 +97,101 @@ const Orders = () => {
               ExcelExport,
               Edit,
               PdfExport,
+              Search,
             ]}
-          />
+            />
         </GridComponent>
-      )}
+        )}
     </div>
-  );
+);
 };
 
 export default Orders;
+
+
+
+
+
+
+// import React, { useState, useEffect } from "react";
+// import axios from "axios";
+// import {
+//   GridComponent,
+//   ColumnsDirective,
+//   ColumnDirective,
+//   Resize,
+//   Sort,
+//   ContextMenu,
+//   Filter,
+//   Page,
+//   ExcelExport,
+//   PdfExport,
+//   Edit,
+//   Inject,
+// } from "@syncfusion/ej2-react-grids";
+
+// import { ordersData, contextMenuItems, ordersGrid } from "../data/dummy";
+// import { Header } from "../components";
+
+// const Orders = () => {
+//   const [artifact, setArtifact] = useState(null);
+
+//   useEffect(() => {
+//     const getArtifact = async () => {
+//       try {
+//         const response = await axios.get(
+//           "https://archaeologs-barc6.ondigitalocean.app/api/artifacts"
+//         );
+//         setArtifact(response.data.data);
+//         //console.log(response.data);
+//       } catch (error) {
+//         console.error(error);
+//       }
+//     };
+
+//     getArtifact();
+//   }, []);
+
+//   const editing = { allowDeleting: true, allowEditing: true };
+
+//   return (
+//     <div className="m-2 md:m-10 mt-24 p-2 md:p-10 bg-white rounded-3xl">
+//       <Header category="Page" title="List of Artifacts" />
+//       {artifact && (
+//         <GridComponent
+//           id="gridcomp"
+//           dataSource={artifact}
+//           allowPaging
+//           allowSorting
+//           allowExcelExport
+//           allowPdfExport
+//           contextMenuItems={contextMenuItems}
+//           editSettings={editing}
+//         >
+//           <ColumnsDirective>
+//             {ordersGrid.map((item, index) => (
+//               <ColumnDirective key={index} {...item} />
+//             ))}
+//           </ColumnsDirective>
+//           <Inject
+//             services={[
+//               Resize,
+//               Sort,
+//               ContextMenu,
+//               Filter,
+//               Page,
+//               ExcelExport,
+//               Edit,
+//               PdfExport,
+//             ]}
+//           />
+//         </GridComponent>
+//       )}
+//     </div>
+//   );
+// };
+
+// export default Orders;
 
 // import React, { useState, useEffect } from 'react';
 // import axios from 'axios';
