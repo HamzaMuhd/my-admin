@@ -8,6 +8,7 @@ import { Ecommerce, Orders, Calendar, Employees, Stacked, Pyramid, Customers, Ka
 import './App.css';
 
 import { useStateContext } from './contexts/ContextProvider';
+import ArtifactDetails from './pages/ArtifactDetails';
 
 const App = () => {
   const { setCurrentColor, setCurrentMode, currentMode, activeMenu, currentColor, themeSettings, setThemeSettings } = useStateContext();
@@ -70,8 +71,9 @@ const App = () => {
 
                 {/* pages  */}
                 <Route path="/List of artifacts" element={<Orders />} />
-                <Route path="/artifact details" element={<Employees />} />
+                <Route path="/Add Artifact" element={<Employees />} />
                 <Route path="/customers" element={<Customers />} />
+                <Route path="/artifact-details/:id" element={<ArtifactDetails />} />
 
                 {/* apps  */}
                 <Route path="/kanban" element={<Kanban />} />

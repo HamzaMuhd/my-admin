@@ -25,9 +25,28 @@ const ArtifactDetails = () => {
     <div className="m-2 md:m-10 mt-24 p-2 md:p-10 bg-white rounded-3xl">
       {artifact ? (
         <>
-          <h1 className="text-2xl font-bold mb-4">{artifact.name}</h1>
-          <p>{artifact.description}</p>
-          {/* render other details of the artifact */}
+        <div className="artdetails">
+        <div className="imageart"><img className="artifact-image"  src={artifact.photos[0].url} alt="artifactimage" /></div>
+        <div className="detail-div">
+        <h1 className="text-2xl font-bold mb-4">{artifact.name}</h1>
+        <p>Category: {artifact.category_id}</p>
+        <p>Country: {artifact.country_id}</p>
+        <p>Location: {artifact.location}</p>
+        <p>Artifact Number: {artifact.artifact_number}</p>
+        <p>Dimension: {artifact.dimension}</p>
+        <p>Artifact Date: {artifact.artifact_date}</p>
+        <p>Approvals: {artifact.approvals}</p>
+        <p>Published: {artifact.published ? "Yes" : "No"}</p>
+        <p>Latitude: {artifact.lat}</p>
+        <p>Longitude: {artifact.lng}</p>
+        <p>Deleted At: {artifact.deleted_at}</p>
+        </div>
+        <div className="artifact-details">
+        <p>{artifact.detail}</p>
+        </div>
+          
+        </div>
+      
         </>
       ) : (
         <p>Loading artifact details...</p>

@@ -559,7 +559,7 @@ export const links = [
         icon: <IoMdContacts />,
       },
       {
-        name: 'customers',
+        name: 'customers',  
         icon: <RiContactsLine />,
       },
     ],
@@ -938,6 +938,12 @@ export const userProfileData = [
 ];
 
 export const ordersGrid = [
+  // {
+  //   field: 'id',
+  //   headerText: 'ID',
+  //   width: '100',
+  //   textAlign: 'Center',
+  // },
   {
     headerText: 'Image',
     template: gridOrderImage,

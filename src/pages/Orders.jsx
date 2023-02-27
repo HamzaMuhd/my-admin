@@ -20,6 +20,7 @@ import { ordersData, contextMenuItems, ordersGrid } from "../data/dummy";
 import { Header } from "../components";
 
 const Orders = () => {
+  const toolbarOptions = ['Search'];
   const [artifact, setArtifact] = useState(null);
   const navigate = useNavigate();
 
@@ -40,10 +41,10 @@ const Orders = () => {
 
   const handleRowClick = (args) => {
     const data = args.rowData;
-    navigate(`/ArtifactDetails/${data.id}`  );
+    navigate(`/artifact-details/${args.data.id}`  );
   };
 
-  const editing = { allowDeleting: true, allowEditing: true };
+  const editing = { allowDeleting: false, allowEditing: false };
 
   return (
     <div className="m-2 md:m-10 mt-24 p-2 md:p-10 bg-white rounded-3xl">
@@ -58,6 +59,7 @@ const Orders = () => {
           allowPdfExport
           contextMenuItems={contextMenuItems}
           editSettings={editing}
+          toolbar={toolbarOptions}
           rowSelected={handleRowClick}
         >
           <ColumnsDirective>
