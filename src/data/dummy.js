@@ -10,7 +10,7 @@ import { HiOutlineRefresh } from 'react-icons/hi';
 import { TiTick } from 'react-icons/ti';
 import { GiLouvrePyramid } from 'react-icons/gi';
 import { GrLocation } from 'react-icons/gr';
-import avatar from './avatar.jpg';
+import avatar from './avatar.png';
 import avatar2 from './avatar2.jpg';
 import avatar3 from './avatar3.png';
 import avatar4 from './avatar4.jpg';
@@ -537,21 +537,25 @@ export const links = [
     title: 'Dashboard',
     links: [
       {
-        name: 'artifacts',
-        icon: <FiShoppingBag />,
+        name: 'list of artifacts',
+        icon: <AiOutlineShoppingCart />,
       },
+      // {
+      //   name: 'artifacts',
+      //   icon: <FiShoppingBag />,
+      // },
     ],
   },
 
   {
     title: 'Pages',
     links: [
+      // {
+      //   name: 'list of artifacts',
+      //   icon: <AiOutlineShoppingCart />,
+      // },
       {
-        name: 'list of artifacts',
-        icon: <AiOutlineShoppingCart />,
-      },
-      {
-        name: 'Artifact details',
+        name: 'Add Artifact',
         icon: <IoMdContacts />,
       },
       {
