@@ -6,8 +6,8 @@ body{
     font-family: "Open Sans", sans-serif;
 }
 .artdetails {
-    width: 1000px;
-    height: 1200px;
+    width: 85%;
+    height: 2000px;
     margin: auto;
     
 }
@@ -35,11 +35,11 @@ body{
 }
 .detail-div p {
     font-family: 'Labrada', serif;
-    font-size: 25px
+    font-size: 22px
 }
 
 .artifact-details p {
-    padding-top: 30px;
+    padding-top: 32px;
     font-family: 'Source Sans Pro', sans-serif;
     font-size: 20px;
     text-align: justify;
